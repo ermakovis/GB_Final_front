@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { StoreItemModel } from "./store-item.model";
 
 @Injectable()
 export class StoreService {
-    getItems() {
-        let subject = new Subject();
+    getItems() : Observable<StoreItemModel[]> {
+        let subject = new Subject<StoreItemModel[]>();
         setTimeout(() => {
             subject.next(ITEMS);
             subject.complete;
@@ -12,12 +13,17 @@ export class StoreService {
         return subject;
     }
 
+    //TODO Add error handler
     getItem(id:number) {
-        return ITEMS.find(item => item.id === id);
+        let item = ITEMS.find(item => item.id === id);
+        if (item === undefined) {
+            throw new TypeError('No such element');
+        }
+        return item;
     }
 }
 
-const ITEMS = [
+const ITEMS : StoreItemModel[] = [
     {
         id: 1,
         title: 'Белая пиксельная коробка',

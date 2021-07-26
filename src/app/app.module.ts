@@ -19,7 +19,8 @@ import {
   StoreItemComponent,
   StoreComponent,
   StoreItemDetailComponent,
-  StoreService
+  StoreService,
+  StoreItemModel
 } from './store/index'
 
 

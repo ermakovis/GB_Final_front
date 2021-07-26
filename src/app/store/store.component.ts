@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core'
-import { StoreService } from './store.service'
+import { StoreItemModel } from './shared';
+import { StoreService } from './shared/store.service'
 
 @Component({
     selector: 'store',
     templateUrl: './store.component.html'
 })
 export class StoreComponent implements OnInit {
-    items?:any
+    items:StoreItemModel[] = [];
     
     constructor(private service: StoreService) {
         

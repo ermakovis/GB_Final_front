@@ -1,12 +1,13 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { StoreService } from "./store.service";
+import { StoreItemModel } from "./shared";
+import { StoreService } from "./shared/store.service";
 
 @Component({
     templateUrl: "./store-item-detail.component.html"
 })
 export class StoreItemDetailComponent{
-    item: any
+    item !: StoreItemModel;
 
     constructor(private storeService: StoreService,
         private route: ActivatedRoute) {}

@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { NotificationService } from "../notifications/notification.service";
+import { StoreItemModel } from "./shared";
 
 @Component({
     selector: 'store-item',
@@ -8,7 +9,7 @@ import { NotificationService } from "../notifications/notification.service";
 export class StoreItemComponent {
     constructor(private notificationService: NotificationService) {
     }
-    @Input() item:any
+    @Input() item !: StoreItemModel
 
     buyButtonClickHandler() {
         this.notificationService.showSuccess('test');
