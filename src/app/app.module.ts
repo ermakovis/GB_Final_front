@@ -22,6 +22,7 @@ import {
   StoreService,
   StoreItemModel
 } from './store/index'
+import { AuthService } from './profile/auth.service';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import {
   providers: [
     StoreRouteActivator,
     StoreService,
-    NotificationService
+    NotificationService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

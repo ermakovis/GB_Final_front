@@ -18,7 +18,12 @@
                         </a>
                     </div>
                     <div class="col-6">
-                        <button [routerLink]="['/profile/main']"
+                        <button *ngIf="!authService.isAuthenticated()" [routerLink]="['/profile/login']"
+                            class="btn btn-dark btn-block" style="font-size: 24px" role="button">
+                            <i class="bi bi-person"></i>
+                        </button>
+
+                        <button *ngIf="authService.isAuthenticated()" [routerLink]="['/profile/main']"
                             class="btn btn-light btn-block" style="font-size: 24px" role="button">
                             <i class="bi bi-person"></i>
                         </button>
