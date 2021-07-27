@@ -1,0 +1,6 @@
+{
+    "/zuul": {
+        "target": "http://localhost:8701/zuul",
+        "secure": false
+    }
+}
