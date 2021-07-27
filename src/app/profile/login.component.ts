@@ -13,17 +13,16 @@ export class LoginComponent{
     userName ?: string;
     password ?: string;
     mouseOverLogin : boolean = false;
+
     constructor(private authService : AuthService,
         private router : Router) {}
 
     login(formValues : any) {
-        console.log(formValues)
         this.authService.loginUser(formValues.userName, formValues.password)
         this.router.navigate(['store'])
     }
     
     cancel() {
         this.router.navigate(['store'])
-
     }
 }
