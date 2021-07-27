@@ -23,12 +23,14 @@ import {
   StoreItemModel
 } from './store/index'
 import { AuthService } from './profile/auth.service';
+import { FooterPanelComponent } from './footer/footer-panel.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderPanelComponent, 
+    HeaderPanelComponent,
+    FooterPanelComponent,
     AdminPanelComponent,
     StoreComponent,
     StoreItemComponent,

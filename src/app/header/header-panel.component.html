@@ -1,32 +1,34 @@
-<div class="jumbotron bg-white py-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-2 text-left">
-                <img [routerLink]="['/store']" class="img-fluid" src="/assets/items/header/notDNS.svg">
-            </div>
-            <div class="col-9">
-                <div class="form-group has-search">
-                    <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" class="form-control" placeholder="Поиск">
-                  </div>
-            </div>
-            <div class="col-1">
-                <div class="row">
-                    <div class="col-6">
-                        <a href="#" class="btn btn-light btn-block" style="font-size: 24px" role="button">
-                            <i class="bi  bi-cart3"></i>
-                        </a>
-                    </div>
-                    <div class="col-6">
-                        <button *ngIf="!authService.isAuthenticated()" [routerLink]="['/profile/login']"
-                            class="btn btn-dark btn-block" style="font-size: 24px" role="button">
-                            <i class="bi bi-person"></i>
-                        </button>
-
-                        <button *ngIf="authService.isAuthenticated()" [routerLink]="['/profile/main']"
-                            class="btn btn-light btn-block" style="font-size: 24px" role="button">
-                            <i class="bi bi-person"></i>
-                        </button>
+<div class="header-wrapper">
+    <div class="jumbotron bg-white py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-2 text-left">
+                    <img [routerLink]="['/store']" class="img-fluid" src="/assets/items/header/notDNS.svg">
+                </div>
+                <div class="col-9">
+                    <div class="form-group has-search">
+                        <span class="fa fa-search form-control-feedback"></span>
+                        <input type="text" class="form-control" placeholder="Поиск">
+                      </div>
+                </div>
+                <div class="col-1">
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="#" class="btn btn-light btn-block" style="font-size: 24px" role="button">
+                                <i class="bi  bi-cart3"></i>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <button *ngIf="!authService.isAuthenticated()" [routerLink]="['/profile/login']"
+                                class="btn btn-dark btn-block" style="font-size: 24px" role="button">
+                                <i class="bi bi-person"></i>
+                            </button>
+    
+                            <button *ngIf="authService.isAuthenticated()" [routerLink]="['/profile/main']"
+                                class="btn btn-light btn-block" style="font-size: 24px" role="button">
+                                <i class="bi bi-person"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
