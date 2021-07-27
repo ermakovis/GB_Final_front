@@ -7,7 +7,7 @@ import { StoreService } from './shared/store.service'
     templateUrl: './store.component.html'
 })
 export class StoreComponent implements OnInit {
-    items:StoreItemModel[] = [];
+    items: StoreItemModel[] = [];
     
     constructor(private service: StoreService) {
         
