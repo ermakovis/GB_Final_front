@@ -1,3 +1,7 @@
 .header-wrapper {
-    height: 48px;
+    min-height: 48px;
+}
+
+.icon-font {
+    font-size: 20px;
 }
