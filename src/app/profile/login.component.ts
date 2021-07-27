@@ -12,6 +12,7 @@ import { AuthService } from "./auth.service";
 export class LoginComponent{
     userName ?: string;
     password ?: string;
+    mouseOverLogin : boolean = false;
     constructor(private authService : AuthService,
         private router : Router) {}
 
