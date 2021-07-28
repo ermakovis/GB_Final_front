@@ -20,7 +20,9 @@ import {
   StoreComponent,
   StoreItemDetailComponent,
   StoreService,
-  StoreItemModel
+  CategoryComponent,
+  CategoryItemComponent,
+  CategoryItemService
 } from './store/index'
 import { AuthService } from './profile/auth.service';
 import { FooterPanelComponent } from './footer/footer-panel.component';
@@ -35,6 +37,8 @@ import { FooterPanelComponent } from './footer/footer-panel.component';
     StoreComponent,
     StoreItemComponent,
     StoreItemDetailComponent,
+    CategoryComponent,
+    CategoryItemComponent,
     NotificationContainerComponent,
     Error404Component
   ],
@@ -48,7 +52,8 @@ import { FooterPanelComponent } from './footer/footer-panel.component';
     StoreRouteActivator,
     StoreService,
     NotificationService,
-    AuthService
+    AuthService,
+    CategoryItemService
   ],
   bootstrap: [AppComponent]
 })

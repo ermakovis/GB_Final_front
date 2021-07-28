@@ -4,7 +4,8 @@ import { StoreItemModel } from "./shared";
 
 @Component({
     selector: 'store-item',
-    templateUrl: './store-item.component.html'
+    templateUrl: './store-item.component.html',
+    styleUrls: ['./store-item.component.css']
 })
 export class StoreItemComponent {
     constructor(private notificationService: NotificationService) {

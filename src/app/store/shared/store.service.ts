@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of, Subject } from "rxjs";
+import { Observable, of} from "rxjs";
 import { catchError } from 'rxjs/operators'; 
 import { StoreItemModel } from "./store-item.model";
 

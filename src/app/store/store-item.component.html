@@ -1,18 +1,21 @@
-<div class="card" style="width: 15rem;">
-    <img [routerLink]="['/store', item.id]" 
-        class="card-img-top" src="/assets/items/placeholder.png">
-    <div class="card-body">
-        <h5 class="card-title">{{item.title}}</h5>
-        <p class="card-text">{{item.description}}</p>
-        <div class="row">
-            <div class="col">
-                <h5 class="text-center offset-6">{{item.cost}}$</h5>
+<div class="col d-inline-flex m-2">
+    <div class="card">
+        <img [routerLink]="['/store', item.id]" 
+            class="card-img-top" src="/assets/items/placeholder.png">
+        <div class="m-1">
+            <div class="h6 my-1">{{item.title}}</div>
+            <div class="card-text">One day description will be there</div>
+            <div class="row">
+                <div class="col">
+                    <div class="text-center offset-6">{{item.cost}}$</div>
+                </div>
+                <div class="col-4">
+                        <button (click)="buyButtonClickHandler()" role="button"
+                            class="btn btn-primary btn-block">
+                            <i class="bi bi-cart"></i>
+                        </button>
+                </div>
             </div>
-            <div class="col-4">
-                    <button class="btn btn-primary btn-block" (click)="buyButtonClickHandler()" role="button">
-                        <i class="bi bi-cart"></i>
-                    </button>
-            </div>
-      </div>
     </div>
-  </div>
+    </div>
+</div>

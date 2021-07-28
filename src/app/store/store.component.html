@@ -1,3 +1,11 @@
-<div class="card-group justify-content-center" >
-    <store-item *ngFor="let item of items" [item]="item"></store-item>
+<div class="row">
+    <div class="col-md-3">
+        <category-panel></category-panel>
+    </div>
+    <div class="col-md-9">
+        <div clas="row-cols-4">
+            <store-item *ngFor="let item of items" [item]="item"></store-item>
+        </div>
+        
+    </div>
 </div>
