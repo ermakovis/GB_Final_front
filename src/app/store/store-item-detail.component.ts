@@ -4,7 +4,8 @@ import { StoreItemModel } from "./shared";
 import { StoreService } from "./shared/store.service";
 
 @Component({
-    templateUrl: "./store-item-detail.component.html"
+    templateUrl: "./store-item-detail.component.html",
+    styleUrls: ["./store-item-detail.component.css"]
 })
 export class StoreItemDetailComponent{
     item !: StoreItemModel;
