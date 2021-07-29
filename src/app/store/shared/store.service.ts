@@ -20,8 +20,7 @@ export class StoreService {
         }
     }
 
-    //TODO Add error handler
-    getItem(id:number) {
+    getItem(id:number) : StoreItemModel {
         return {
             id: 1,
             title: "qwe",
