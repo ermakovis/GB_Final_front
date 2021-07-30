@@ -1,4 +1,4 @@
 export interface CategoryItemModel {
-    id : number
-    name: string
+    id: number
+    title: string
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { CategoryItemModel } from "./category-item.model";
+import { CategoryItemModel } from "../../models/category-item.model";
 
 @Component({
     selector: "category-item",
