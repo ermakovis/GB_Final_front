@@ -24,7 +24,7 @@ import {
   CategoryItemComponent,
   CategoryItemService
 } from './store/index'
-import { AuthService } from './profile/auth.service';
+import { AuthService } from './services/auth.service';
 import { FooterPanelComponent } from './footer/footer-panel.component';
 
 

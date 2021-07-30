@@ -10,7 +10,11 @@ export class NotificationService{
 
     showSuccess(message: string) {
         this.show(message, { classname: 'bg-success text-light', delay: 2000 });
-      }
+    }
+
+    showFailure(message: string) {
+        this.show(message, { classname: 'bg-danger text-light', delay: 2000})
+    }
 
     remove(toast: any) {
     this.toasts = this.toasts.filter(t => t !== toast);

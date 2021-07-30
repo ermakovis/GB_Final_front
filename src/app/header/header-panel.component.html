@@ -22,11 +22,11 @@
 
             <!-- Profile button-->
             <div>
-                <button *ngIf="!authService.isAuthenticated()" [routerLink]="['/profile/login']"
+                <button [routerLink]="['/profile/login']"
                     class="btn btn-dark" role="button">
                     <i class="bi bi-person"></i>
                 </button>
-                <button *ngIf="authService.isAuthenticated()" [routerLink]="['/profile/main']"
+                <button [routerLink]="['/profile/main']"
                     class="btn btn-light" role="button">
                     <i class="bi bi-person"></i>
                 </button>

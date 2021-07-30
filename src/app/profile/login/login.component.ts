@@ -1,7 +1,8 @@
 
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { AuthService } from "../auth.service";
+import { NotificationService } from "src/app/notifications/notification.service";
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
     templateUrl: './login.component.html',
@@ -15,10 +16,19 @@ export class LoginComponent{
     mouseOverLogin : boolean = false;
 
     constructor(private authService : AuthService,
-        private router : Router) {}
+        private router : Router,
+        private notificationService: NotificationService) {}
 
     login(formValues : any) {
-        this.authService.loginUser(formValues.userName, formValues.password)
+        this.authService.login(formValues.userName, formValues.password).subscribe(
+            data => {
+                this.notificationService.showSuccess("Logon!")
+            },
+            err => {
+                this.notificationService.showFailure("Failure!")
+            }
+
+        )
         this.router.navigate(['store'])
     }
     

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { FormControl, FormGroup, Validators } from "@angular/forms"
 import { Router } from "@angular/router"
-import { AuthService } from "./auth.service"
+import { AuthService } from "src/app/services/auth.service";
 
 @Component({
     templateUrl: './profile.component.html',
@@ -23,16 +23,16 @@ export class ProfileComponent implements OnInit{
         private router: Router) {}
 
     ngOnInit() {
-        this.firstNameForm = new FormControl(
-            this.authService.currentUser?.firstName, Validators.required
-        )
-        this.lastNameForm = new FormControl(
-            this.authService.currentUser?.lastName, Validators.required
-        )
-        this.profileForm = new FormGroup ({
-            firstName: this.firstNameForm,
-            lastName: this.lastNameForm
-        })
+        // this.firstNameForm = new FormControl(
+        //     this.authService.currentUser?.firstName, Validators.required
+        // )
+        // this.lastNameForm = new FormControl(
+        //     this.authService.currentUser?.lastName, Validators.required
+        // )
+        // this.profileForm = new FormGroup ({
+        //     firstName: this.firstNameForm,
+        //     lastName: this.lastNameForm
+        // })
     }
 
     validateFirstName() : boolean {
@@ -48,11 +48,11 @@ export class ProfileComponent implements OnInit{
     }
 
     saveProfile(formValues: any) {
-        if (!this.profileForm.valid) return
+        // if (!this.profileForm.valid) return
 
-        this.authService.updateCurrentUser(
-            formValues.firstName, formValues.lastName
-        )
+        // this.authService.updateCurrentUser(
+        //     formValues.firstName, formValues.lastName
+        // )
         this.router.navigate(['store'])
     }
 
