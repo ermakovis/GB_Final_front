@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { StoreItemModel } from './shared';
-import { StoreService } from './shared/store.service'
+import { StoreItemModel } from "../models/store-item.model";
+import { StoreService } from '../services/store.service'
 
 @Component({
     selector: 'store',

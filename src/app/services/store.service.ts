@@ -2,14 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of} from "rxjs";
 import { catchError } from 'rxjs/operators'; 
-import { StoreItemModel } from "./store-item.model";
+import { StoreItemModel } from "../models/store-item.model";
 
 @Injectable()
 export class StoreService {
     constructor(private httpClient: HttpClient) {}
 
     getItems() : Observable<StoreItemModel[]> {
-        return this.httpClient.get<StoreItemModel[]>('/zuul/service/get-products')
+        return this.httpClient.get<StoreItemModel[]>('/zuul/service/products/get-products')
                 .pipe(catchError(this.handleError<StoreItemModel[]>('getEvents', [])))
     }
 

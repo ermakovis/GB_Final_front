@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, Router } from "@angular/router";
-import { StoreService } from "./shared/store.service";
+import { StoreService } from "../services/store.service";
 
 @Injectable()
 export class StoreRouteActivator implements CanActivate{

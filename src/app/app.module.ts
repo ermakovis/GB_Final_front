@@ -19,12 +19,16 @@ import {
   StoreItemComponent,
   StoreComponent,
   StoreItemDetailComponent,
-  StoreService,
   CategoryComponent,
   CategoryItemComponent,
   CategoryItemService
 } from './store/index'
-import { AuthService } from './services/auth.service';
+
+import {
+  AuthService,
+  StoreService,
+  CartService
+} from './services/index'
 import { FooterPanelComponent } from './footer/footer-panel.component';
 
 

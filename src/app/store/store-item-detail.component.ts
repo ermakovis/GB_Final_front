@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { StoreItemModel } from "./shared";
-import { StoreService } from "./shared/store.service";
+import { StoreItemModel } from "../models/store-item.model";
+import { StoreService } from "../services/store.service";
 
 @Component({
     templateUrl: "./store-item-detail.component.html",

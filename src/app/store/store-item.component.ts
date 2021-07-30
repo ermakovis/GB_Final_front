@@ -1,6 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { NotificationService } from "../notifications/notification.service";
-import { StoreItemModel } from "./shared";
+import { StoreItemModel } from "../models/store-item.model";
+
 
 @Component({
     selector: 'store-item',
