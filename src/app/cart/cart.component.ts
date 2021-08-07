@@ -14,12 +14,9 @@ export class CartComponent implements OnInit {
         this.cartService.getSubject().subscribe(
             items => {
                 this.cartItems = items
-                console.warn(this.cartItems)
             }, err => {
                 console.error(err)
             }
-            
         )
-        
     }
 }

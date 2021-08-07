@@ -13,8 +13,7 @@ export class CartService {
         'Content-Type': 'application/json',
         'Accept' : 'application/json'})
 
-    private orderItems: ProductModel[] = []
-    private subject = new BehaviorSubject<ProductModel[]>(this.orderItems)
+    private subject = new BehaviorSubject<ProductModel[]>([])
 
     constructor(private httpClient: HttpClient) {
         this.httpClient.get<ProductModel[]>(this.cartEndpoint + '/get-basket')
@@ -41,7 +40,6 @@ export class CartService {
                 console.error(err)
             }
         )
-
     }
 
     add(product : ProductModel) {
