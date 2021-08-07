@@ -1,17 +1,25 @@
 import { Component, OnInit } from "@angular/core";
-import { OrderItemModel } from "../models/order-item.model";
+import { ProductModel } from "../models/product.model";
 import { CartService } from "../services";
 
 @Component({
     templateUrl : './cart.component.html'
 })
 export class CartComponent implements OnInit {
-    private cartItems : OrderItemModel[] = []
+    cartItems : ProductModel[] = []
 
     constructor(private cartService: CartService) {}
 
     ngOnInit() {
-        this.cartItems = this.cartService.get()
+        this.cartService.getSubject().subscribe(
+            items => {
+                this.cartItems = items
+                console.warn(this.cartItems)
+            }, err => {
+                console.error(err)
+            }
+            
+        )
+        
     }
-
 }

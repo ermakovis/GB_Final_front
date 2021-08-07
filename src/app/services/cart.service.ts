@@ -1,28 +1,47 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable, OnInit} from "@angular/core";
+import { BehaviorSubject, Observable } from "rxjs";
 import { OrderItemModel } from "../models/order-item.model";
 import { ProductModel } from "../models/product.model";
 
 @Injectable({
     providedIn: 'root'
 })
-export class CartService implements OnInit {
+export class CartService {
     private cartEndpoint = "/zuul/service/basket"
     private httpOptions : any = new HttpHeaders({
         'Content-Type': 'application/json',
         'Accept' : 'application/json'})
 
-    private orderItems: OrderItemModel[] = []
+    private orderItems: ProductModel[] = []
+    private subject = new BehaviorSubject<ProductModel[]>(this.orderItems)
 
-    constructor(private httpClient: HttpClient) {}
-
-    ngOnInit() {
+    constructor(private httpClient: HttpClient) {
         this.httpClient.get<ProductModel[]>(this.cartEndpoint + '/get-basket')
-            .subscribe(items => this.orderItems = this.mapToOrder(items))
+            .subscribe(
+                items => {
+                    this.subject.next(items)
+                }, err => {
+                    console.error(err)
+                }
+            )
     }
 
-    get() : OrderItemModel[] {
-        return this.orderItems;
+    getSubject() : BehaviorSubject<ProductModel[]> {
+        return this.subject
+    }
+
+    get() {
+        this.httpClient.get<ProductModel[]>(this.cartEndpoint + '/get-basket', {
+            'headers' : this.httpOptions
+        }).subscribe(
+            items => {
+                this.subject.next(items)
+            }, err => {
+                console.error(err)
+            }
+        )
+
     }
 
     add(product : ProductModel) {
@@ -30,35 +49,23 @@ export class CartService implements OnInit {
                 'headers' : this.httpOptions
             }).subscribe(
                 items => {
-                    this.orderItems = this.mapToOrder(items)
-                    console.log(this.orderItems)
-                },
-                err => {console.error(err)}
+                    this.subject.next(items)
+                }, err => {
+                    console.error(err)
+                }
             )
-        
     }
 
-    mapToOrder(productItems : ProductModel[]) : OrderItemModel[] {
-        let ret : OrderItemModel[] = []
-
-        productItems.forEach(e => {
-            let item: OrderItemModel | undefined = ret.find(item => item.product.id === e.id)
-            if (item) {
-                item.quantity++
-                item.cost = item.price * item.quantity
-            } else {
-                item = {
-                    id: 0,
-                    product: e,
-                    quantity: 1,
-                    price: e.cost,
-                    cost: e.cost
-                }
-                ret.push(item)
+    remove(product : ProductModel) {
+        this.httpClient.post<ProductModel[]>(this.cartEndpoint + '/del', product, {
+            'headers' : this.httpOptions
+        }).subscribe(
+            items => {
+                this.subject.next(items)
+            }, err => {
+                console.error(err)
             }
-        })
-
-        return ret;
+        )
     }
 
 }

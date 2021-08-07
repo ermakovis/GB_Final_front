@@ -1,7 +1,7 @@
 <div class="jumbotron bg-white py-2">
     <!--Container class needed to align starts of header and main content-->
     <div class="container">
-        <div class="d-flex flex-row align-item-conter">
+        <div class="d-flex flex-row">
             <!-- Site icon -->
             <div class="me-2">
                 <img [routerLink]="['/store']" class="img-fluid align-self-center " src="/assets/items/header/notDNS.svg">
@@ -9,15 +9,15 @@
 
             <!-- Search bar-->
             <div class="flex-fill form-group has-search">
-                <span class="fa fa-search form-control-feedback"></span>
+                <!-- <span class="fa fa-search form-control-feedback"></span> -->
                 <input type="text" class="form-control" placeholder="Поиск">
             </div>
 
             <!-- Cart button -->
             <div>
-                <a href="#" class="btn btn-light mx-2" role="button">
+                <button [routerLink]="['/cart']" class="btn btn-light mx-2" role="button">
                     <i class="bi bi-cart3"></i>
-                </a>
+                </button>
             </div>
 
             <!-- Profile button-->
