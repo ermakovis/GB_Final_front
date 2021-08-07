@@ -1,20 +1,30 @@
 import { Component, Input } from "@angular/core";
 import { NotificationService } from "../notifications/notification.service";
-import { StoreItemModel } from "../models/store-item.model";
+import { CartService } from "../services";
+import { ProductModel } from "../models/product.model";
 
 
 @Component({
     selector: 'store-item',
     templateUrl: './store-item.component.html',
-    styleUrls: ['./store-item.component.css']
+    styles: [`
+        .card {
+            width: 12rem;
+            height: 20rem;
+        }
+    `]
 })
 export class StoreItemComponent {
-    constructor(private notificationService: NotificationService) {
+    @Input() item !: ProductModel
+
+
+    constructor(private notificationService: NotificationService,
+        private cartService : CartService) {
     }
-    @Input() item !: StoreItemModel
 
     buyButtonClickHandler() {
-        this.notificationService.showSuccess('test');
+        this.cartService.add(this.item)
+        this.notificationService.showSuccess(this.item.title + ' added');
     }
 }
 

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { StoreItemModel } from "../models/store-item.model";
+import { Component, Injectable, OnInit } from '@angular/core'
+import { ProductModel } from '../models/product.model';
 import { StoreService } from '../services/store.service'
 
 @Component({
@@ -7,11 +7,9 @@ import { StoreService } from '../services/store.service'
     templateUrl: './store.component.html'
 })
 export class StoreComponent implements OnInit {
-    items: StoreItemModel[] = [];
+    items: ProductModel[] = [];
     
-    constructor(private service: StoreService) {
-        
-    }
+    constructor(private service: StoreService) {}
 
     ngOnInit() {
         this.service.getItems().subscribe(items => {

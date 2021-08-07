@@ -1,10 +1,10 @@
 import { CategoryItemModel } from "./category-item.model";
 
 export interface ProductModel {
-    id: bigint
+    id: number
     category: CategoryItemModel
     title: string
-    price: number
+    cost: number
     shortDescription: string
     fullDescription: string
     photoUrl: string

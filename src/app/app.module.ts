@@ -30,6 +30,7 @@ import {
   CartService
 } from './services/index'
 import { FooterPanelComponent } from './footer/footer-panel.component';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { FooterPanelComponent } from './footer/footer-panel.component';
     HeaderPanelComponent,
     FooterPanelComponent,
     AdminPanelComponent,
+    CartComponent,
     StoreComponent,
     StoreItemComponent,
     StoreItemDetailComponent,
