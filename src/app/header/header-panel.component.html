@@ -30,11 +30,11 @@
 
             <!-- Profile button-->
             <div>
-                <button [routerLink]="['/profile/login']"
+                <button *ngIf="!authorized" [routerLink]="['/profile/login']"
                     class="btn btn-dark" role="button">
                     <i class="bi bi-person"></i>
                 </button>
-                <button [routerLink]="['/profile/main']"
+                <button *ngIf="authorized" [routerLink]="['/profile/main']"
                     class="btn btn-light" role="button">
                     <i class="bi bi-person"></i>
                 </button>

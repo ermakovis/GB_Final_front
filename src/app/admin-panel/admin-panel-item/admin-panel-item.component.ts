@@ -10,6 +10,8 @@ import { StoreService } from 'src/app/services';
 export class AdminPanelItemComponent {
   @Input() item!: ProductModel
 
+  
+
   handleEdit() {
 
   }

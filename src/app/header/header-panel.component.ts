@@ -7,10 +7,11 @@ import { AuthService } from "src/app/services/auth.service";
     styleUrls: ["./header-panel.component.css"]
 })
 export class HeaderPanelComponent{
-    authService : AuthService;
+    authService : AuthService
+    authorized : boolean = false
 
     constructor(authService: AuthService) {
         this.authService = authService;
+        this.authService.isAuthorized().subscribe(auth => this.authorized = auth)
     }
-
 }
