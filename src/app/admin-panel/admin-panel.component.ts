@@ -1,22 +1,20 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { ProductModel } from "../models/product.model";
+import { StoreService } from "../services";
 
 @Component({
-    template: `
-        <h1> New iten </h1>
-        <hr>
-        <div class='col-md-6'>
-            <h3> There will be item creation </h3>
-            <button type="button" class="btn btn-default"
-                (click)="handleCreateClick()"
-            >
-                Cancel
-            </button>
-        </div>
-    `
+    templateUrl: './admin-panel.component.html'
 })
-export class AdminPanelComponent{
-    constructor(private router: Router) {} 
+export class AdminPanelComponent implements OnInit{
+    items !: ProductModel[]
+
+    constructor(private router: Router,
+        private storeService: StoreService) {} 
+
+    ngOnInit() {
+        this.storeService.getItems().subscribe(items => this.items = items)
+    }
 
     handleCreateClick() {
         this.router.navigate(['/store']);

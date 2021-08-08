@@ -32,6 +32,7 @@ import {
 import { FooterPanelComponent } from './footer/footer-panel.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item.component';
+import { AdminPanelItemComponent } from './admin-panel/admin-panel-item/admin-panel-item.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { CartItemComponent } from './cart/cart-item.component';
     HeaderPanelComponent,
     FooterPanelComponent,
     AdminPanelComponent,
+    AdminPanelItemComponent,
     CartComponent,
     CartItemComponent,
     StoreComponent,
