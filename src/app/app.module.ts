@@ -33,6 +33,7 @@ import { FooterPanelComponent } from './footer/footer-panel.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item.component';
 import { AdminPanelItemComponent } from './admin-panel/admin-panel-item/admin-panel-item.component';
+import { AdminPanelItemEditComponent } from './admin-panel/admin-panel-item-edit/admin-panel-item-edit.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AdminPanelItemComponent } from './admin-panel/admin-panel-item/admin-pa
     CategoryComponent,
     CategoryItemComponent,
     NotificationContainerComponent,
-    Error404Component
+    Error404Component,
+    AdminPanelItemEditComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

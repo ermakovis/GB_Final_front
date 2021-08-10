@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CategoryItemModel } from "../../models/category-item.model";
-import { CategoryItemService } from "./category.service";
+import { CategoryItemService } from "../../services/category.service";
 
 @Component({
     selector: "category-panel",

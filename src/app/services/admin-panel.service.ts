@@ -24,6 +24,8 @@ export class AdminPanelService {
     this.storeService.getItems().subscribe(items => this.items.next(items))
   }
 
+  
+
   editItem(item : ProductModel) {
     this.httpClient.put(this.url, item, {'headers' : this.httpOptions})
       .subscribe() 
