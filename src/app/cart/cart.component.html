@@ -1,3 +1,10 @@
-<div class="p-3">
-    <cart-item *ngFor="let item of cartItems" [item]="item"></cart-item>
+<div class="cart-container-wrapper">
+    <div class="p-3">
+        <cart-item *ngFor="let item of cartItems" [item]="item"></cart-item>
+    </div>
+    <button (click)="createOrder()" role="button"
+        class="btn btn-primary btn-block">
+        Оформить
+    </button>
 </div>
+

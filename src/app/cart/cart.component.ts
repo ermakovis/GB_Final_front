@@ -19,4 +19,8 @@ export class CartComponent implements OnInit {
             }
         )
     }
+
+    createOrder() {
+        this.cartService.createOrder()
+    }
 }

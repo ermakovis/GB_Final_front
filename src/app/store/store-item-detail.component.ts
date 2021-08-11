@@ -7,7 +7,7 @@ import { CartService, StoreService } from "../services";
     templateUrl: "./store-item-detail.component.html"
 })
 export class StoreItemDetailComponent{
-    id !: string;
+    id !: number;
     item !: ProductModel;
 
     constructor(private storeService: StoreService,
@@ -16,6 +16,7 @@ export class StoreItemDetailComponent{
 
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
+        this.storeService.getItem(this.id).subscribe(item => this.item = item)
     }
 
     add() {

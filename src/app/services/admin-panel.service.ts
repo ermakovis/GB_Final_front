@@ -8,7 +8,8 @@ import { StoreService } from './store.service';
   providedIn: 'root'
 })
 export class AdminPanelService {
-  private url = "/zuul/service/products"
+  private productUrl = "/zuul/service/products"
+
   private httpOptions = new HttpHeaders({'Content-Type': 'application/json'})
   private items = new BehaviorSubject<ProductModel[]>([])
 
@@ -27,13 +28,13 @@ export class AdminPanelService {
   
 
   editItem(item : ProductModel) {
-    this.httpClient.put(this.url, item, {'headers' : this.httpOptions})
+    this.httpClient.put(this.productUrl, item, {'headers' : this.httpOptions})
       .subscribe() 
     this.getItems()
   }
 
   createItem(item: ProductModel) {
-    this.httpClient.put(this.url, item, {'headers' : this.httpOptions})
+    this.httpClient.put(this.productUrl, item, {'headers' : this.httpOptions})
       .subscribe() 
     this.getItems()
   }

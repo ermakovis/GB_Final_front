@@ -4,7 +4,7 @@ export interface ProductModel {
     id: number
     category: CategoryItemModel
     title: string
-    cost: number
+    price: number
     quantity: number
     shortDescription: string
     fullDescription: string
