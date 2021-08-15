@@ -12,8 +12,13 @@ export class AuthService {
     private httpOptions: any = new HttpHeaders({'Content-Type': 'application/json'})
     private user = new BehaviorSubject<UserModel>({'id' : -1, 'login' : 'dummy'})
     private authorized = new BehaviorSubject<boolean>(false)
+    private token : String = ""
 
     constructor(private httpClient: HttpClient){}
+
+    getToken() : String {
+        return this.token
+    }
 
     getSubject() : BehaviorSubject<UserModel> {
         return this.user;
@@ -24,14 +29,14 @@ export class AuthService {
     }
 
     login(username: string, password: string) {
-        return this.httpClient.post<UserModel>(this.url + '/auth', {
+        return this.httpClient.post<String>(this.url + '/auth', {
             username,
             password
         }, {'headers' : this.httpOptions})
             .subscribe(
                 user => {
                     console.warn(user)
-                    this.user.next(user)
+                    this.token = user
                     this.authorized.next(true)
                 }, err => console.error(err));
                 

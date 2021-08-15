@@ -70,6 +70,19 @@ export class CartService {
             )
     }
 
+    removeOne(product : ProductModel) {
+        this.httpClient.post<ProductModel[]>(this.cartEndpoint + '/decriment', product, {
+            'headers' : this.httpOptions
+        }).subscribe(
+            items => {
+                this.subject.next(items)
+            }, err => {
+                console.error(err)
+            }
+        )
+    }
+
+
     remove(product : ProductModel) {
         this.httpClient.post<ProductModel[]>(this.cartEndpoint + '/del', product, {
             'headers' : this.httpOptions

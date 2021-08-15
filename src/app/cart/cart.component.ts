@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
     }
 
     createOrder() {
+        console.log("CART - createOrder called")
         this.cartService.createOrder()
     }
 }

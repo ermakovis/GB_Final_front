@@ -15,8 +15,10 @@ export const appRoutes: Routes = [
     { path: 'store', component: StoreComponent},
     { path: 'store/:id', component: StoreItemDetailComponent,
         canActivate: [StoreRouteActivator] },
-    { path: 'admin-panel', component: AdminPanelComponent,
-        canDeactivate: [StoreRouteActivator]},
+    { path: 'admin-panel', 
+        loadChildren: () => import('./admin-panel/admin-panel.module')
+                        .then(m => m.AdminPanelModule)
+    },
     { path: 'profile', 
         loadChildren: () => import('./profile/profile.module')
                         .then(m => m.ProfileModule)

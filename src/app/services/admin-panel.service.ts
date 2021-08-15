@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ProductModel } from '../models/product.model';
 import { StoreService } from './store.service';
+
+const HTTP_HEADERS = new HttpHeaders({'Content-Type': 'application/json'})
 
 @Injectable({
   providedIn: 'root'
@@ -10,31 +12,40 @@ import { StoreService } from './store.service';
 export class AdminPanelService {
   private productUrl = "/zuul/service/products"
 
-  private httpOptions = new HttpHeaders({'Content-Type': 'application/json'})
-  private items = new BehaviorSubject<ProductModel[]>([])
+  private itemsSubject = new BehaviorSubject<ProductModel[]>([])
 
   constructor(private storeService: StoreService,
     private httpClient: HttpClient) {}
   
   getItemsSubject() : BehaviorSubject<ProductModel[]> {
     this.getItems()
-    return this.items
+    return this.itemsSubject
+  }
+
+  getItem(id : number) : Observable<ProductModel> {
+    return this.storeService.getItem(id);
   }
 
   getItems() {
-    this.storeService.getItems().subscribe(items => this.items.next(items))
+    this.storeService.getItems().subscribe(items => {
+      this.itemsSubject.next(items) 
+    })
   }
 
-  
+  deleteItem(item: ProductModel) {
+    this.httpClient.delete(this.productUrl + '/' + item.id, {'headers': HTTP_HEADERS})
+      .subscribe()
+      this.getItems()
+  }
 
-  editItem(item : ProductModel) {
-    this.httpClient.put(this.productUrl, item, {'headers' : this.httpOptions})
+  editItem(item: ProductModel) {
+    this.httpClient.put(this.productUrl, item, {'headers': HTTP_HEADERS})
       .subscribe() 
     this.getItems()
   }
 
   createItem(item: ProductModel) {
-    this.httpClient.put(this.productUrl, item, {'headers' : this.httpOptions})
+    this.httpClient.put(this.productUrl, item, {'headers': HTTP_HEADERS})
       .subscribe() 
     this.getItems()
   }

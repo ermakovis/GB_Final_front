@@ -2,7 +2,7 @@
 <div class="admin-panel-wrapper col-md-8 col-lg-6 m-auto">
     <h1>Admin panel</h1>
     <div class="col">
-        <button class="btn btn-secondary btn-sm">Создать</button>
+        <button [routerLink]="['/admin-panel/edit']" class="btn btn-secondary btn-sm">Создать</button>
     </div>
     <admin-panel-item *ngFor="let item of items" [item]="item"></admin-panel-item>
 </div>

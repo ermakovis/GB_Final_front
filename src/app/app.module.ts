@@ -11,7 +11,6 @@ import { NotificationContainerComponent } from './notifications/notification-con
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { Error404Component } from './errors/404.component';
 import { StoreRouteActivator } from './store/store-route-activator';
 
@@ -32,8 +31,6 @@ import {
 import { FooterPanelComponent } from './footer/footer-panel.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item.component';
-import { AdminPanelItemComponent } from './admin-panel/admin-panel-item/admin-panel-item.component';
-import { AdminPanelItemEditComponent } from './admin-panel/admin-panel-item-edit/admin-panel-item-edit.component';
 
 
 @NgModule({
@@ -41,8 +38,6 @@ import { AdminPanelItemEditComponent } from './admin-panel/admin-panel-item-edit
     AppComponent,
     HeaderPanelComponent,
     FooterPanelComponent,
-    AdminPanelComponent,
-    AdminPanelItemComponent,
     CartComponent,
     CartItemComponent,
     StoreComponent,
@@ -51,8 +46,7 @@ import { AdminPanelItemEditComponent } from './admin-panel/admin-panel-item-edit
     CategoryComponent,
     CategoryItemComponent,
     NotificationContainerComponent,
-    Error404Component,
-    AdminPanelItemEditComponent
+    Error404Component
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

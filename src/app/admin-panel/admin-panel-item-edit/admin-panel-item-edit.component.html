@@ -1,1 +1,44 @@
-<p>admin-panel-item-edit works!</p>
+<div>
+    <h1>Edit item</h1>
+    <hr>
+    <div class="col-md-4">
+        <form [formGroup]="profileForm" (ngSubmit)="saveItem(profileForm.value)"
+            autocomplete="off" novalidate>
+            <div [ngClass]="{'error' : !validateTitle()}" class="form-group">
+                <label for="firstName">Title:</label>
+                <em *ngIf="!validateTitle()">Required</em>
+                <input formControlName="title" id="title" type="text" 
+                    class="form-control" placeholder="Title..."/>
+            </div>
+            <div [ngClass]="{'error' : !validatePrice()}" class="form-group">
+                <label for="firstName">Price:</label>
+                <em *ngIf="!validatePrice()">Required</em>
+                <input formControlName="price" id="price" type="text" 
+                    class="form-control" placeholder="Price..."/>
+            </div>
+            <div [ngClass]="{'error' : !validateShortDescription()}" class="form-group">
+                <label for="shortDescription">shortDescription:</label>
+                <em *ngIf="!validateShortDescription()">Required</em>
+                <input formControlName="shortDescription" id="shortDescription" type="text" 
+                    class="form-control" placeholder="shortDescription..."/>
+            </div>
+            <div [ngClass]="{'error' : !validateFullDescription()}" class="form-group">
+                <label for="fullDescription">fullDescription:</label>
+                <em *ngIf="!validateFullDescription()">Required</em>
+                <input formControlName="fullDescription" id="fullDescription" type="text" 
+                    class="form-control" placeholder="fullDescription..."/>
+            </div>
+            <div [ngClass]="{'error' : !validatePhotoUrl()}" class="form-group">
+                <label for="firstName">photoUrl:</label>
+                <em *ngIf="!validatePhotoUrl()">Required</em>
+                <input formControlName="photoUrl" id="photoUrl" type="text" 
+                    class="form-control" placeholder="photoUrl..."/>
+            </div>
+
+            <button [disabled]="!validateAll()"
+                type="submit" class="btn btn-primary">Save</button>
+            <button (click)="cancel()" 
+                type="cancel" class="btn btn-default">Cancel</button>
+        </form>
+    </div>
+</div>

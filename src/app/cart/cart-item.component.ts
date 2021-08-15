@@ -28,7 +28,7 @@ export class CartItemComponent {
     constructor(private cartService: CartService) {}
 
     onMinus() {
-        this.cartService.remove(this.item)
+        this.cartService.removeOne(this.item)
     }
 
     onPlus() {

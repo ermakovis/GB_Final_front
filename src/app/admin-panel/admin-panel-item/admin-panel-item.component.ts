@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/product.model';
 import { StoreService } from 'src/app/services';
+import { AdminPanelService } from 'src/app/services/admin-panel.service';
 
 @Component({
   selector: 'admin-panel-item',
@@ -10,14 +12,15 @@ import { StoreService } from 'src/app/services';
 export class AdminPanelItemComponent {
   @Input() item!: ProductModel
 
-  
+  constructor(private adminPanelService : AdminPanelService,
+    private router: Router) {}
 
   handleEdit() {
-
+    this.router.navigate(['/admin-panel/edit/' + this.item.id])
   }
 
   handleDelete() {
-
+    this.adminPanelService.deleteItem(this.item);
   }
 
   handleDuplicate() {
