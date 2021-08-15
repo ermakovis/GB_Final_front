@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -31,6 +31,7 @@ import {
 import { FooterPanelComponent } from './footer/footer-panel.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { CartItemComponent } from './cart/cart-item.component';
     HttpClientModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     StoreRouteActivator,
     StoreService,
     NotificationService,

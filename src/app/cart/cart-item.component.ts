@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { OrderItemModel } from "../models/order-item.model";
+import { BasketItemModel } from "../models/basket-item.model";
 import { ProductModel } from "../models/product.model";
 import { CartService } from "../services";
 
@@ -23,15 +23,15 @@ import { CartService } from "../services";
     `]
 })
 export class CartItemComponent { 
-    @Input() item !: ProductModel
+    @Input() item !: BasketItemModel
     
     constructor(private cartService: CartService) {}
 
     onMinus() {
-        this.cartService.removeOne(this.item)
+        this.cartService.removeOne(this.item.productDTO)
     }
 
     onPlus() {
-        this.cartService.add(this.item)
+        this.cartService.add(this.item.productDTO)
     }
 }

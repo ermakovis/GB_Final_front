@@ -12,6 +12,6 @@ export class HeaderPanelComponent{
 
     constructor(authService: AuthService) {
         this.authService = authService;
-        this.authService.isAuthorized().subscribe(auth => this.authorized = auth)
+        this.authService.isAuthorized.subscribe(auth => this.authorized = auth)
     }
 }

@@ -1,53 +1,67 @@
 
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { UserModel } from "../models/user.model";
+import { Router } from "@angular/router";
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { map } from "rxjs/operators";
+import { UserDtoModel } from "../models/userDto.model";
+
+const HTTP_HEADERS = new HttpHeaders({'Content-Type': 'application/json'})
+const AUTH_URL = '/zuul/service'
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    private url = '/zuul/service'
-    private httpOptions: any = new HttpHeaders({'Content-Type': 'application/json'})
-    private user = new BehaviorSubject<UserModel>({'id' : -1, 'login' : 'dummy'})
-    private authorized = new BehaviorSubject<boolean>(false)
-    private token : String = ""
+    private userSubject: BehaviorSubject<UserDtoModel>
+    private isAuthorizedSubject = new BehaviorSubject<boolean>(false)
+    public isAuthorized: Observable<boolean>
+    public user: Observable<UserDtoModel>
 
-    constructor(private httpClient: HttpClient){}
 
-    getToken() : String {
-        return this.token
+    constructor(private router: Router,
+        private http: HttpClient) {
+
+        let userJson = localStorage.getItem('user')
+        if (userJson) {
+            this.userSubject = new BehaviorSubject<UserDtoModel>(JSON.parse(userJson))
+            this.isAuthorizedSubject.next(true)
+        } else {
+            this.userSubject = new BehaviorSubject<UserDtoModel>({addresses: []});
+
+        }
+        this.isAuthorized = this.isAuthorizedSubject.asObservable();
+        this.user = this.userSubject.asObservable();
     }
 
-    getSubject() : BehaviorSubject<UserModel> {
-        return this.user;
-    }
-
-    isAuthorized() : BehaviorSubject<boolean> {
-        return this.authorized
+    public get userValue(): UserDtoModel {
+        return this.userSubject.value;
     }
 
     login(username: string, password: string) {
-        return this.httpClient.post<String>(this.url + '/auth', {
-            username,
-            password
-        }, {'headers' : this.httpOptions})
-            .subscribe(
-                user => {
-                    console.warn(user)
-                    this.token = user
-                    this.authorized.next(true)
-                }, err => console.error(err));
-                
+        return this.http.post<UserDtoModel>(
+            `${AUTH_URL}/auth`, 
+            {username, password}, 
+            {'headers': HTTP_HEADERS}
+            ).pipe(map(user => {
+                localStorage.setItem('user', JSON.stringify(user));
+                    this.userSubject.next(user);
+                    return user;
+                }));
     }
 
-    register(username: string, password: string, email: string) {
-        return this.httpClient.post<UserModel>(this.url + '/registration', {
-            username,
-            password,
-            email
-        }, {'headers' : this.httpOptions})
-            .subscribe(user => this.user.next(user));
+    logout() {
+        localStorage.removeItem('user');
+        this.userSubject.next({addresses: []});
+        this.router.navigate(['/login']);
     }
+
+    // register(username: string, password: string, email: string) {
+    //     return this.http.post<UserDtoModel>(AUTH_URL + '/registration', {
+    //         username,
+    //         password,
+    //         email
+    //     }, {'headers' : HTTP_HEADERS})
+    //         .subscribe(user => this.user = user);
+    // }
 }

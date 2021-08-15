@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { UserModel } from "src/app/models/user.model";
+import { UserDtoModel } from "src/app/models/userDto.model";
 import { NotificationService } from "src/app/notifications/notification.service";
 import { AuthService } from "src/app/services/auth.service";
 
@@ -12,7 +12,7 @@ import { AuthService } from "src/app/services/auth.service";
     `]
 })
 export class LoginComponent implements OnInit {
-    private user !: UserModel
+    private user ?: UserDtoModel
     userName ?: string;
     password ?: string;
     mouseOverLogin : boolean = false;
@@ -22,14 +22,14 @@ export class LoginComponent implements OnInit {
         private notificationService: NotificationService) {}
 
     ngOnInit() {
-        this.authService.getSubject().subscribe(user => {
-            this.user = user
-            if (user.id !== -1) this.notificationService.showSuccess("login successfull")   
-        })
+        this.authService.user.subscribe(user => this.user = user)
     }
 
     login(formValues : any) {
-        this.authService.login(formValues.userName, formValues.password)
+        this.authService.login(formValues.userName, formValues.password).subscribe(
+            user => this.user = user,
+            err => console.error(err)
+        )
         this.router.navigate(['store'])
     }
     
