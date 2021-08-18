@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { BasketItemModel } from "../models/basket-item.model";
-import { ProductModel } from "../models/product.model";
 import { CartService } from "../services";
 
 @Component({
@@ -23,7 +22,6 @@ export class CartComponent implements OnInit {
     }
 
     createOrder() {
-        console.log("CART - createOrder called")
         this.cartService.createOrder()
     }
 }

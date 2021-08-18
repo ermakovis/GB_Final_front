@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { BehaviorSubject } from "rxjs";
 import { BasketItemModel } from "../models/basket-item.model";
 import { ProductModel } from "../models/product.model";
+import { UserDtoModel } from "../models/userDto.model";
 import { AuthService } from "./auth.service";
 
 const HTTP_HEADERS = new HttpHeaders({
@@ -19,7 +21,8 @@ export class CartService {
     private subject = new BehaviorSubject<BasketItemModel[]>([])
 
     constructor(private httpClient: HttpClient,
-        private authService: AuthService) {
+        private authService: AuthService,
+        private router: Router) {
         this.httpClient.get<BasketItemModel[]>(this.cartEndpoint + '/get-basket')
             .subscribe(
                 items => {this.subject.next(items)}, 
@@ -32,17 +35,24 @@ export class CartService {
     }
 
     createOrder() {
-        var userModel = this.authService.userValue
-        if (!userModel) return
+        let user: UserDtoModel = this.authService.userValue
+        
+        if (!user) return
 
-        this.httpClient.post(this.orderUrl + '/create',
-            userModel.user,
+        let username = user.userDTO?.username
+        let addresssId = user.addressDTOList[0].addressId
+        if (!username || !addresssId) return
+
+        this.httpClient.post(this.orderUrl + '/create?userName=' + username + "&addressId=" + addresssId,
             {'headers' : HTTP_HEADERS}
         ).subscribe(
-            ok => {this.get()},
+            ok => {
+                this.get()
+                this.router.navigate(['/store'])
+            },
             err => console.error(err)
         )
-    }
+    }       
 
     get() {
         this.httpClient.get<BasketItemModel[]>(this.cartEndpoint + '/get-basket', {

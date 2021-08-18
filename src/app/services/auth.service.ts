@@ -2,7 +2,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, of } from "rxjs";
+import { BehaviorSubject, Observable} from "rxjs";
 import { map } from "rxjs/operators";
 import { UserDtoModel } from "../models/userDto.model";
 
@@ -26,7 +26,7 @@ export class AuthService {
             this.userSubject = new BehaviorSubject<UserDtoModel>(JSON.parse(userJson))
             this.isAuthorizedSubject.next(true)
         } else {
-            this.userSubject = new BehaviorSubject<UserDtoModel>({addresses: []});
+            this.userSubject = new BehaviorSubject<UserDtoModel>({addressDTOList: []});
 
         }
         this.isAuthorized = this.isAuthorizedSubject.asObservable();
@@ -43,7 +43,7 @@ export class AuthService {
             {username, password}, 
             {'headers': HTTP_HEADERS}
             ).pipe(map(user => {
-                localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.setItem('user', JSON.stringify(user));
                     this.userSubject.next(user);
                     this.isAuthorizedSubject.next(true)
                     return user;
@@ -52,7 +52,7 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('user');
-        this.userSubject.next({addresses: []});
+        this.userSubject.next({addressDTOList: []});
         this.router.navigate(['/store']);
         this.isAuthorizedSubject.next(false)
     }
