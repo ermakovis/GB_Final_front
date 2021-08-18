@@ -34,19 +34,17 @@ export class AdminPanelService {
 
   deleteItem(item: ProductModel) {
     this.httpClient.delete(this.productUrl + '/' + item.id, {'headers': HTTP_HEADERS})
-      .subscribe()
-      this.getItems()
+      .subscribe(ok => {this.getItems()})
   }
 
   editItem(item: ProductModel) {
     this.httpClient.put(this.productUrl, item, {'headers': HTTP_HEADERS})
-      .subscribe() 
-    this.getItems()
+      .subscribe(ok => {this.getItems()}) 
+    
   }
 
   createItem(item: ProductModel) {
     this.httpClient.put(this.productUrl, item, {'headers': HTTP_HEADERS})
-      .subscribe() 
-    this.getItems()
+      .subscribe(ok => {this.getItems()}) 
   }
 }

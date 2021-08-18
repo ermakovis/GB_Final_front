@@ -18,7 +18,6 @@ export class AuthService {
     public isAuthorized: Observable<boolean>
     public user: Observable<UserDtoModel>
 
-
     constructor(private router: Router,
         private http: HttpClient) {
 
@@ -46,6 +45,7 @@ export class AuthService {
             ).pipe(map(user => {
                 localStorage.setItem('user', JSON.stringify(user));
                     this.userSubject.next(user);
+                    this.isAuthorizedSubject.next(true)
                     return user;
                 }));
     }
@@ -53,7 +53,8 @@ export class AuthService {
     logout() {
         localStorage.removeItem('user');
         this.userSubject.next({addresses: []});
-        this.router.navigate(['/login']);
+        this.router.navigate(['/store']);
+        this.isAuthorizedSubject.next(false)
     }
 
     // register(username: string, password: string, email: string) {

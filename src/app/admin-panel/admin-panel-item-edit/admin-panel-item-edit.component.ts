@@ -29,26 +29,6 @@ export class AdminPanelItemEditComponent implements OnInit {
     private adminPanelService: AdminPanelService
   ) {}
 
-  // ngOnInit(): void {
-  //   let id = this.route.snapshot.params['id'];
-  //   this.adminPanelService.getItem(id).subscribe(item => {
-  //     this.item = item
-  //     this.title = new FormControl(this.item?.title)
-  //     this.price = new FormControl(this.item?.price)
-  //     this.shortDescription = new FormControl(this.item?.shortDescription)
-  //     this.fullDescription = new FormControl(this.item?.fullDescription)
-  //     this.photoUrl = new FormControl(this.item?.photoUrl)
-
-  //     this.profileForm = new FormGroup({
-  //       title: this.title,
-  //       price: this.price,
-  //       shortDescription: this.shortDescription,
-  //       fullDescription: this.fullDescription,
-  //       photoUrl: this.photoUrl
-  //     })
-  //   })
-  // }
-
   ngOnInit() {
     let id = this.route.snapshot.params['id'];
     this.isAddMode = !id;

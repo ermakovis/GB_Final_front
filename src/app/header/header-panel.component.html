@@ -19,25 +19,25 @@
                     <i class="bi bi-gear"></i>
                 </button>
             </div>
-            
-
-            <!-- Cart button -->
-            <div>
-                <button [routerLink]="['/cart']" class="btn btn-light mx-2" role="button">
-                    <i class="bi bi-cart3"></i>
-                </button>
-            </div>
 
             <!-- Profile button-->
             <div>
+                <div *ngIf="authorized" ngbDropdown class="d-inline-block">
+                    <button class="btn btn-light" id="profileDropdown" ngbDropdownToggle>
+                        <i class="bi bi-person"></i>
+                    </button>
+                    <div ngbDropdownMenu aria-labelledby="profileDropdown">
+                        <button [routerLink]="['/cart']" ngbDropdownItem>Корзина</button>
+                        <button ngbDropdownItem>Заказы</button>
+                        <button ngbDropdownItem>Профиль</button>
+                        <button (click)="handleLogoutButton()" ngbDropdownItem>Выход</button>
+                    </div>
+                </div>
                 <button *ngIf="!authorized" [routerLink]="['/profile/login']"
                     class="btn btn-dark" role="button">
                     <i class="bi bi-person"></i>
                 </button>
-                <button *ngIf="authorized" [routerLink]="['/profile/main']"
-                    class="btn btn-light" role="button">
-                    <i class="bi bi-person"></i>
-                </button>
+
             </div>
         </div>
     </div>

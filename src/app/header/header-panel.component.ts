@@ -1,3 +1,4 @@
+import { ThrowStmt } from "@angular/compiler";
 import { Component } from "@angular/core";
 import { AuthService } from "src/app/services/auth.service";
 
@@ -13,5 +14,9 @@ export class HeaderPanelComponent{
     constructor(authService: AuthService) {
         this.authService = authService;
         this.authService.isAuthorized.subscribe(auth => this.authorized = auth)
+    }
+
+    handleLogoutButton() {
+        this.authService.logout();
     }
 }
