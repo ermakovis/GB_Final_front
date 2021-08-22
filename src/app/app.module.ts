@@ -34,6 +34,9 @@ import { CartItemComponent } from './cart/cart-item.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { OrderComponent } from './order/order.component';
 import { OrderItemComponent } from './order/order-item/order-item.component';
+import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './profile/login/login.component';
+import { RegistrationComponent } from './profile/registration/registration.component';
 
 
 @NgModule({
@@ -51,7 +54,10 @@ import { OrderItemComponent } from './order/order-item/order-item.component';
     NotificationContainerComponent,
     Error404Component,
     OrderComponent,
-    OrderItemComponent
+    OrderItemComponent,
+    ProfileComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

@@ -8,15 +8,19 @@ import { AuthService } from "src/app/services/auth.service";
     styleUrls: ["./header-panel.component.css"]
 })
 export class HeaderPanelComponent{
-    authService : AuthService
-    authorized : boolean = false
+    authService: AuthService
+    authorized: boolean = false
 
     constructor(authService: AuthService) {
-        this.authService = authService;
+        this.authService = authService
         this.authService.isAuthorized.subscribe(auth => this.authorized = auth)
     }
 
     handleLogoutButton() {
-        this.authService.logout();
+        this.authService.logout()
+    }
+
+    handleLoginButton() {
+        this.authService.showModalWindow()
     }
 }

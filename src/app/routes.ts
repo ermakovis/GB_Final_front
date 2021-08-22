@@ -21,9 +21,5 @@ export const appRoutes: Routes = [
         loadChildren: () => import('./admin-panel/admin-panel.module')
                         .then(m => m.AdminPanelModule)
     },
-    { path: 'profile', 
-        loadChildren: () => import('./profile/profile.module')
-                        .then(m => m.ProfileModule)
-    },
     { path: '404', component: Error404Component}
 ]

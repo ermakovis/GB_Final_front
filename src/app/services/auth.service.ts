@@ -2,9 +2,11 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BehaviorSubject, Observable} from "rxjs";
 import { map } from "rxjs/operators";
 import { UserDtoModel } from "../models/userDto.model";
+import { ProfileComponent } from "../profile/profile.component";
 
 const HTTP_HEADERS = new HttpHeaders({'Content-Type': 'application/json'})
 const AUTH_URL = '/zuul/service'
@@ -19,7 +21,8 @@ export class AuthService {
     public user: Observable<UserDtoModel>
 
     constructor(private router: Router,
-        private http: HttpClient) {
+        private http: HttpClient,
+        private modalService: NgbModal) {
 
         let userJson = localStorage.getItem('user')
         if (userJson) {
@@ -55,6 +58,10 @@ export class AuthService {
         this.userSubject.next({addressDTOList: []});
         this.router.navigate(['/store']);
         this.isAuthorizedSubject.next(false)
+    }
+
+    showModalWindow() {
+        this.modalService.open(ProfileComponent)
     }
 
     // register(username: string, password: string, email: string) {
