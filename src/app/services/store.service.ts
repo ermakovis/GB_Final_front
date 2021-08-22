@@ -2,26 +2,25 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of} from "rxjs";
 import { catchError } from 'rxjs/operators'; 
+import { CategoryItemModel } from "../models/category-item.model";
 import { ProductModel } from "../models/product.model";
+
+const CATEGORIES_URL = '/zuul/service/category'
+const PRODUCTS_URL = '/zuul/service/products'
+
 @Injectable()
 export class StoreService {
-    private serviceUrl = '/zuul/service/products'
-
     constructor(private httpClient: HttpClient) {}
 
     getItems() : Observable<ProductModel[]> {
-        return this.httpClient.get<ProductModel[]>(this.serviceUrl + '/get-products')
-                .pipe(catchError(this.handleError<ProductModel[]>('getEvents', [])))
-    }
-
-    private handleError<T> (operation = 'operation', result?: T) {
-        return (error: any) : Observable<T> => {
-            console.error(error)
-            return of(result as T)
-        }
+        return this.httpClient.get<ProductModel[]>(PRODUCTS_URL + '/get-products');
     }
 
     getItem(id:number) : Observable<ProductModel> {
-        return this.httpClient.get<ProductModel>(this.serviceUrl + '/' + id);
+        return this.httpClient.get<ProductModel>(PRODUCTS_URL + '/' + id);
+    }
+
+    getCategories() : Observable<CategoryItemModel[]> {
+        return this.httpClient.get<CategoryItemModel[]>(CATEGORIES_URL + '/get-all')
     }
 }

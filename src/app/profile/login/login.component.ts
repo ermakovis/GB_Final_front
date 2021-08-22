@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from 'src/app/notifications/notification.service';
-import { AuthService } from 'src/app/services';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'profile-login',

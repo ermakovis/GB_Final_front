@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ProductModel } from "../models/product.model";
-import { StoreService } from "../services";
 import { AdminPanelService } from "../services/admin-panel.service";
 
 @Component({

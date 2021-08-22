@@ -1,19 +1,22 @@
-import { Component, Injectable, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core';
 import { ProductModel } from '../models/product.model';
-import { StoreService } from '../services/store.service'
+import { StoreService } from '../services/store.service';
+
 
 @Component({
-    selector: 'store',
-    templateUrl: './store.component.html'
+  selector: 'store',
+  templateUrl: './store.component.html',
+  styleUrls: ['./store.component.css']
 })
 export class StoreComponent implements OnInit {
-    items: ProductModel[] = [];
-    
-    constructor(private service: StoreService) {}
+  items: ProductModel[] = []
 
-    ngOnInit() {
-        this.service.getItems().subscribe(items => {
-            this.items = items;
-        })
-    }
+  constructor(private storeService: StoreService) { }
+
+  ngOnInit(): void {
+    this.storeService.getItems().subscribe(
+      items => this.items = items
+    )
+  }
+
 }

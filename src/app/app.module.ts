@@ -12,22 +12,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
 
 import { Error404Component } from './errors/404.component';
-import { StoreRouteActivator } from './store/store-route-activator';
 
-import {
-  StoreItemComponent,
-  StoreComponent,
-  StoreItemDetailComponent,
-  CategoryComponent,
-  CategoryItemComponent,
-  CategoryItemService
-} from './store/index'
-
-import {
-  AuthService,
-  StoreService,
-  CartService
-} from './services/index'
 import { FooterPanelComponent } from './footer/footer-panel.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item.component';
@@ -38,6 +23,17 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './profile/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './profile/registration/registration.component';
+import { StoreComponent } from './store/store.component';
+import { StoreItemComponent } from './store/store-item/store-item.component';
+import { StoreItemDetailComponent } from './store/store-item-detail/store-item-detail.component';
+import { CategoryComponent } from './store/category/category.component';
+import { CategoryItemComponent } from './store/category-item/category-item.component';
+
+import { CartService } from './services/cart.service';
+import { OrderService } from './services/order.service';
+import { AuthService } from './services/auth.service';
+import { AdminPanelService } from './services/admin-panel.service';
+import { StoreService } from './services/store.service';
 
 
 @NgModule({
@@ -69,11 +65,12 @@ import { RegistrationComponent } from './profile/registration/registration.compo
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    StoreRouteActivator,
-    StoreService,
     NotificationService,
+    CartService,
+    OrderService,
     AuthService,
-    CategoryItemService
+    AdminPanelService,
+    StoreService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from 'src/app/notifications/notification.service';
-import { AuthService } from 'src/app/services';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'profile-registration',
