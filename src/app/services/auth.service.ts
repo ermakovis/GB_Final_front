@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BehaviorSubject, Observable} from "rxjs";
 import { map } from "rxjs/operators";
+import { UserModel } from "../models/user.model";
 import { UserDtoModel } from "../models/userDto.model";
 import { ProfileComponent } from "../profile/profile.component";
 
@@ -53,6 +54,15 @@ export class AuthService {
                 }));
     }
 
+    register(username: string, password: string, email: string): Observable<any> {
+        let user: UserModel = {
+            username: username,
+            password: password,
+            mail: email
+        }
+        return this.http.post<UserDtoModel>(AUTH_URL + '/registration', user, {'headers' : HTTP_HEADERS})
+    }
+
     logout() {
         localStorage.removeItem('user');
         this.userSubject.next({addressDTOList: []});
@@ -64,12 +74,5 @@ export class AuthService {
         this.modalService.open(ProfileComponent)
     }
 
-    // register(username: string, password: string, email: string) {
-    //     return this.http.post<UserDtoModel>(AUTH_URL + '/registration', {
-    //         username,
-    //         password,
-    //         email
-    //     }, {'headers' : HTTP_HEADERS})
-    //         .subscribe(user => this.user = user);
-    // }
+
 }

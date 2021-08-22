@@ -1,5 +1,5 @@
 export interface AddressModel {
-    addressId: bigint
+    addressId: number
     region: string
     city: string
     street: string

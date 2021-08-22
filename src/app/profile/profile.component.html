@@ -11,6 +11,7 @@
             <ng-template ngbNavContent>
                 <profile-login></profile-login>
             </ng-template>
+            
         </li>
         <li [ngbNavItem]="2">
             <a ngbNavLink>Регистрация</a>
@@ -18,7 +19,6 @@
                 <profile-registration></profile-registration>
             </ng-template>
         </li>
-
-        </ul>
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
 </div>

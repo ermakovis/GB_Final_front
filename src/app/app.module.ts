@@ -36,6 +36,7 @@ import { OrderComponent } from './order/order.component';
 import { OrderItemComponent } from './order/order-item/order-item.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './profile/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrationComponent } from './profile/registration/registration.component';
 
 
@@ -56,14 +57,15 @@ import { RegistrationComponent } from './profile/registration/registration.compo
     OrderComponent,
     OrderItemComponent,
     ProfileComponent,
-    LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
     NgbModule,
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule 
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -40,10 +40,14 @@ export class CartService {
         if (!user) return
 
         let username = user.userDTO?.username
-        let addresssId = user.addressDTOList[0].addressId
-        if (!username || !addresssId) return
+        let addressId = 1
+        if (user.addressDTOList.length !== 0)
+            addressId = user.addressDTOList[0].addressId
+        
 
-        this.httpClient.post(this.orderUrl + '/create?userName=' + username + "&addressId=" + addresssId,
+        if (!username || !addressId) return
+
+        this.httpClient.post(this.orderUrl + '/create?userName=' + username + "&addressId=" + addressId,
             {'headers' : HTTP_HEADERS}
         ).subscribe(
             ok => {
