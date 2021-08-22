@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit{
         private router: Router) {}
 
     ngOnInit() {
-        
+
         // this.firstNameForm = new FormControl(
         //     this.authService.currentUser?.firstName, Validators.required
         // )
