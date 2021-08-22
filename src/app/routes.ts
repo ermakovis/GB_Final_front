@@ -7,12 +7,14 @@ import {
     StoreRouteActivator,
     StoreComponent
 } from './store/index'
+import { OrderComponent } from "./order/order.component";
 
 
 export const appRoutes: Routes = [
     { path: '', redirectTo: '/store', pathMatch: 'full'},
     { path: 'cart', component: CartComponent},
     { path: 'store', component: StoreComponent},
+    { path: 'order', component: OrderComponent},
     { path: 'store/:id', component: StoreItemDetailComponent,
         canActivate: [StoreRouteActivator] },
     { path: 'admin-panel', 

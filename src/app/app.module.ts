@@ -32,6 +32,8 @@ import { FooterPanelComponent } from './footer/footer-panel.component';
 import { CartComponent } from './cart/cart.component';
 import { CartItemComponent } from './cart/cart-item.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { OrderComponent } from './order/order.component';
+import { OrderItemComponent } from './order/order-item/order-item.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     CategoryComponent,
     CategoryItemComponent,
     NotificationContainerComponent,
-    Error404Component
+    Error404Component,
+    OrderComponent,
+    OrderItemComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
