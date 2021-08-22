@@ -19,9 +19,7 @@ export class OrderService {
         ORDER_URL,
         {headers: HTTP_HEADERS}
       ).subscribe(
-
         item => {
-          console.warn(item)
           this.orderSubject.next(item)
         },
         err => console.error(err)

@@ -9,6 +9,10 @@ import { StoreService } from 'src/app/services/store.service';
 })
 export class CategoryComponent implements OnInit {
   categories: CategoryItemModel[] = []
+  dummyCategory: CategoryItemModel = {
+    categoryId: -1,
+    title: 'Все товары'
+  }
 
   constructor(private service : StoreService) {}
 

@@ -27,7 +27,7 @@ export class AdminPanelService {
   }
 
   getItems() {
-    this.storeService.getItems().subscribe(items => {
+    this.storeService.getAllItems().subscribe(items => {
       this.itemsSubject.next(items) 
     })
   }
