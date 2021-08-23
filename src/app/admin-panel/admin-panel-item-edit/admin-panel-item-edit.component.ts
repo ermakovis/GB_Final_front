@@ -51,6 +51,7 @@ export class AdminPanelItemEditComponent implements OnInit {
         photoUrl: ['', Validators.required]
     });
 
+
     if (this.id) {
         this.adminPanelService.getItem(this.id)
             .pipe(first())
@@ -77,11 +78,12 @@ export class AdminPanelItemEditComponent implements OnInit {
       fullDescription: formValues.fullDescription,
       photoUrl: this.selectedFileName
     }
+
     if (this.item?.id) {
       model.id = this.item.id
-      this.adminPanelService.createItem(model)
-    } else {
       this.adminPanelService.editItem(model)
+    } else {
+      this.adminPanelService.createItem(model)
     }
     this.router.navigate(['admin-panel'])
     

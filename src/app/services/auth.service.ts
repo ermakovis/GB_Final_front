@@ -11,15 +11,20 @@ import { ProfileComponent } from "../profile/profile.component";
 
 const HTTP_HEADERS = new HttpHeaders({'Content-Type': 'application/json'})
 const AUTH_URL = '/zuul/service'
+const ADMIN_ITEMS_URL = '/zuul/service/admin'
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     private userSubject: BehaviorSubject<UserDtoModel>
+    public user: Observable<UserDtoModel>
+
     private isAuthorizedSubject = new BehaviorSubject<boolean>(false)
     public isAuthorized: Observable<boolean>
-    public user: Observable<UserDtoModel>
+    
+    private isAuthorizedAdmin = new BehaviorSubject<boolean>(false)
+    public isAdmin: Observable<boolean>
 
     constructor(private router: Router,
         private http: HttpClient,
@@ -31,10 +36,19 @@ export class AuthService {
             this.isAuthorizedSubject.next(true)
         } else {
             this.userSubject = new BehaviorSubject<UserDtoModel>({addressDTOList: []});
-
         }
-        this.isAuthorized = this.isAuthorizedSubject.asObservable();
-        this.user = this.userSubject.asObservable();
+
+        //YEP
+        let userRole = localStorage.getItem('role')
+        if (userRole === '1') {
+            this.isAuthorizedAdmin.next(true)
+        } else {
+            this.isAuthorizedAdmin.next(false)
+        }
+        
+        this.isAuthorized = this.isAuthorizedSubject.asObservable()
+        this.user = this.userSubject.asObservable()
+        this.isAdmin = this.isAuthorizedAdmin.asObservable()
     }
 
     public get userValue(): UserDtoModel {
@@ -47,9 +61,17 @@ export class AuthService {
             {username, password}, 
             {'headers': HTTP_HEADERS}
             ).pipe(map(user => {
+                    console.log(user)
                     localStorage.setItem('user', JSON.stringify(user));
+
                     this.userSubject.next(user);
                     this.isAuthorizedSubject.next(true)
+                    this.http.get(ADMIN_ITEMS_URL + '/get-all').subscribe(
+                        ok => {
+                            localStorage.setItem('role', '1')
+                            this.isAuthorizedAdmin.next(true)
+                        }
+                    )
                     return user;
                 }));
     }
@@ -65,14 +87,14 @@ export class AuthService {
 
     logout() {
         localStorage.removeItem('user');
+        localStorage.removeItem('role')
         this.userSubject.next({addressDTOList: []});
         this.router.navigate(['/store']);
         this.isAuthorizedSubject.next(false)
+        this.isAuthorizedAdmin.next(false)
     }
 
     showModalWindow() {
         this.modalService.open(ProfileComponent)
     }
-
-
 }

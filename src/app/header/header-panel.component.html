@@ -15,7 +15,7 @@
 
             <!-- Cart button -->
             <div>
-                <button [routerLink]="['/admin-panel']" class="btn btn-light mx-2" role="button">
+                <button *ngIf="isAdmin" [routerLink]="['/admin-panel']" class="btn btn-light mx-2" role="button">
                     <i class="bi bi-gear"></i>
                 </button>
             </div>
