@@ -1,6 +1,8 @@
 <div class="col d-inline-flex m-2">
     <div class="card">
-        <img [routerLink]="['/store', item.id]" 
+        <img *ngIf=image [routerLink]="['/store', item.id]" 
+            class="card-img-top" src={{image}}>
+        <img *ngIf=!image [routerLink]="['/store', item.id]" 
             class="card-img-top" src="/assets/items/placeholder.png">
         <div class="m-1">
             <div class="h6 my-1">{{item.title}}</div>

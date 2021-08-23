@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { ProductModel } from 'src/app/models/product.model';
 import { AdminPanelService } from 'src/app/services/admin-panel.service';
+import { FileSaverService } from 'src/app/services/file-saver.service';
 
 @Component({
   selector: 'app-admin-panel-item-edit',
@@ -12,12 +13,9 @@ import { AdminPanelService } from 'src/app/services/admin-panel.service';
 })
 export class AdminPanelItemEditComponent implements OnInit {
   private item?: ProductModel
-
-  private title!: FormControl
-  private price!: FormControl
-  private shortDescription!: FormControl
-  private fullDescription!: FormControl
-  private photoUrl!: FormControl
+  private selectedFile?: File
+  private selectedFileName?: string
+  private id?: number
 
   profileForm!: FormGroup
   isAddMode = false
@@ -26,12 +24,18 @@ export class AdminPanelItemEditComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private adminPanelService: AdminPanelService
+    private adminPanelService: AdminPanelService,
+    private fileSaver: FileSaverService
   ) {}
 
+  onFileChanged(event: any) {
+    this.selectedFile = event.target.files[0]
+    this.selectedFileName = this.selectedFile?.name
+  }
+
   ngOnInit() {
-    let id = this.route.snapshot.params['id'];
-    this.isAddMode = !id;
+    this.id = this.route.snapshot.params['id'];
+    this.isAddMode = !this.id;
     
     // password not required in edit mode
     const passwordValidators = [Validators.minLength(6)];
@@ -47,8 +51,8 @@ export class AdminPanelItemEditComponent implements OnInit {
         photoUrl: ['', Validators.required]
     });
 
-    if (!this.isAddMode) {
-        this.adminPanelService.getItem(id)
+    if (this.id) {
+        this.adminPanelService.getItem(this.id)
             .pipe(first())
             .subscribe(item => {
               this.profileForm.patchValue(item)
@@ -58,12 +62,20 @@ export class AdminPanelItemEditComponent implements OnInit {
   }
 
   saveItem(formValues: any) {
+    console.log(this.selectedFile)
+    if (this.selectedFile) this.fileSaver.uploadFile(this.selectedFile.name, this.selectedFile)
+      .subscribe(
+        res => console.log(res),
+        err => console.error(err)
+      )
+
     let model: ProductModel = {
+      id: this.id,
       title: formValues.title,
       price: formValues.price,
       shortDescription: formValues.shortDescription,
       fullDescription: formValues.fullDescription,
-      photoUrl: formValues.photoUrl
+      photoUrl: this.selectedFileName
     }
     if (this.item?.id) {
       model.id = this.item.id
@@ -79,32 +91,8 @@ export class AdminPanelItemEditComponent implements OnInit {
     this.router.navigate(['admin-panel'])
   }
 
-  validateTitle(): boolean {
-    return this.title?.valid || true
-  }
-
-  validatePrice(): boolean {
-    return this.price?.valid || true
-  }
-
-  validateShortDescription(): boolean {
-    return this.shortDescription?.valid || true
-  }
-
-  validateFullDescription(): boolean {
-    return this.fullDescription?.valid || true
-  }
-
-  validatePhotoUrl(): boolean {
-    return this.photoUrl?.valid || true
-  }
-
   validateAll(): boolean {
-    return this.validateTitle() &&
-      this.validatePrice() &&
-      this.validateShortDescription() &&
-      this.validateFullDescription() &&
-      this.validatePhotoUrl()
+    return this.profileForm.valid
   }
 }
 
