@@ -43,7 +43,7 @@ export class StoreService {
     }
 
     updateCategory(categoryId: number) {
-        if (categoryId == -1) this.getItems(1, 10)
-        this.getItems(1, 10, categoryId)
+        if (categoryId == -1) this.getItems(1, 12)
+        this.getItems(1, 12, categoryId)
     }
 }
