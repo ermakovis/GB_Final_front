@@ -1,3 +1,17 @@
-<div class="order-item-wrapper">
-    {{orderString}}
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingString">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseOne' + item.order_id" aria-expanded="true" aria-controls="collapseOne">
+        Заказ#{{item.order_id}}
+        </button>
+    </h2>
+    <div [attr.id]="'collapseOne' + item.order_id" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+            <div *ngFor="let orderItem of orderItems">
+                <strong>{{orderItem.product.title}}</strong><p>{{orderItem.product.price}} руб. x {{orderItem.quantity}}</p>
+            </div>
+            <div>
+                Общая сумма: {{item.totalCost}}
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { OrderItemModel } from 'src/app/models/order-item.model';
+import { OrderModel } from 'src/app/models/order.model';
 
 @Component({
   selector: 'order-item',
@@ -7,13 +8,14 @@ import { OrderItemModel } from 'src/app/models/order-item.model';
   styleUrls: ['./order-item.component.css']
 })
 export class OrderItemComponent implements OnInit {
-  @Input() item!: OrderItemModel
-  orderString!: string
-  
+  @Input() item!: OrderModel
+  orderItems!: OrderItemModel[]
+   
   constructor() { }
 
   ngOnInit(): void {
-    this.orderString = JSON.stringify(this.item)
+    const id = this.item.order_id
+    this.orderItems = this.item.orderItems
   }
 
 }

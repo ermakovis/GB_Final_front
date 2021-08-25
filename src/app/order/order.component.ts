@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderItemModel } from '../models/order-item.model';
+import { OrderModel } from '../models/order.model';
 import { OrderService } from '../services/order.service';
 
 @Component({
@@ -7,14 +8,19 @@ import { OrderService } from '../services/order.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  items!: OrderItemModel[]
+  items!: OrderModel[]
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.orderService.getItems
     this.orderService.order.subscribe(
-      items => this.items = items
+      items => {
+        console.warn(items)
+        this.items = items
+      }
     )
+    
   }
 
 }
